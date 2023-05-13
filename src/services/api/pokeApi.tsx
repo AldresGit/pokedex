@@ -16,11 +16,13 @@ const getConfig: Params = {
     method: 'get'
 }
 
+const PAGE_SIZE = 20;
+
 export const getPokemonList = async (url: string, page: number): Promise<{data: PaginatedResponse<Pokemon[]>, status: number}> => {
     console.log('La data que le viene --> ', page);
     return await axios({
         ...getConfig,
-        url: `${getConfig.baseUrl}/${url}?offset=${page*20}&limit=20`,
+        url: `${getConfig.baseUrl}/${url}?offset=${page*PAGE_SIZE}&limit=20`,
     }).then((response) => {
         return {
             status: response.status,

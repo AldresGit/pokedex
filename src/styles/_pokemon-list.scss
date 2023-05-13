@@ -1,0 +1,11 @@
+.poke-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+
+  .poke-card {
+    width: 300px;
+    height: 200px;
+  }
+
+}

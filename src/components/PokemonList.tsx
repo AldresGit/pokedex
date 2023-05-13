@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { Pokemon } from "../models/pokemon";
-import { getPokemonIdFromURL } from "../utils/utils";
+import { getPokemonIdFromURL, getPokemonSpriteFromURL } from "../utils/utils";
+import PokemonElement from "./PokemonElement/PokemonElement";
 
 interface PokemonListProps {
   data: Pokemon[];
@@ -8,25 +9,11 @@ interface PokemonListProps {
 
 const PokemonList: FC<PokemonListProps> = ({ data }) => {
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Número</th>
-          <th>Nombre</th>
-          <th>Sprite</th>
-        </tr>
-      </thead>
-      <tbody>
-        {data.map(pokemon => (
-          <tr key={pokemon.name} className="separacion">
-            <td>{getPokemonIdFromURL(pokemon.url)}</td>
-            <td>{pokemon.name}</td>
-            {/* Crear componente sprite */}
-            <td><img src="" alt="" /></td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <main className="poke-list">
+      {data.map(pokemon => (
+        <PokemonElement id={getPokemonIdFromURL(pokemon.url)} name={pokemon.name} sprite={getPokemonSpriteFromURL(pokemon.url)}></PokemonElement>
+      ))}
+    </main>
   )
 };
 
