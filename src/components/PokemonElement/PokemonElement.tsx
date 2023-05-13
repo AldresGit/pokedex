@@ -11,8 +11,7 @@ const PokemonElement: FC<PokemonElementProps> = ({ id, name, sprite }) => {
   
   return (
     <div className="poke-card">
-      <h3>{name}</h3>
-      <h4>{id}</h4>
+      <h3>{id} - {name}</h3>
       <PokemonSprite sprite={sprite}></PokemonSprite>
     </div>
   )
