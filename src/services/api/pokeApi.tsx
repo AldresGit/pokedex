@@ -16,19 +16,16 @@ const getConfig: Params = {
     method: 'get'
 }
 
-export const getPokemonList = async (url: string, data: number): Promise<PaginatedResponse<Pokemon>> => {
+export const getPokemonList = async (url: string, data: [number, number]): Promise<{data: PaginatedResponse<Pokemon[]>, status: number}> => {
     console.log('La data que le viene --> ', data);
-    
     return await axios({
         ...getConfig,
-        url: `${getConfig.baseUrl}/${url}`,
+        url: `${getConfig.baseUrl}/${url}?offset=${data[0]}&limit=${data[1]}`,
     }).then((response) => {
-        console.log('La respuesta de la api', response);
-        // return {
-        //     status: response.status,
-        //     data: response.data
-        // }
-        return response.data;
+        return {
+            status: response.status,
+            data: response.data
+        }
     }).catch((error) => {
         console.log(error);
         return {

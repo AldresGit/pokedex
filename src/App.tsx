@@ -1,11 +1,26 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.scss'
 import { getPokemonList } from './services/api/pokeApi'
+import { Pokemon } from './models/pokemon'
+import { getGenerationRange } from './utils/utils'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+  
+  const getGenerationList = useMemo(() => getPokemonList('pokemon/', getGenerationRange(count)).then(
+    (response) => {
+      if(response.status === 200) {
+        setPokemons(response.data.results);
+      }
+      // Show error in other case
+    }
+  ), [count]);
+
+  console.log('La lista de pokemons guardados ---> ', pokemons);
+  
 
   return (
     <>
@@ -21,7 +36,7 @@ function App() {
       <div className="card">
         <button onClick={() => {
             setCount((count) => count + 1);
-            getPokemonList('pokemon/', count);
+            getGenerationList;
           }
         }>
           count is {count}
