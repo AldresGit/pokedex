@@ -5,13 +5,18 @@ import PokemonElement from "./PokemonElement/PokemonElement";
 
 interface PokemonListProps {
   data: Pokemon[];
+  openEditModal: (pokemonId: string) => void;
 }
 
-const PokemonList: FC<PokemonListProps> = ({ data }) => {
+const PokemonList: FC<PokemonListProps> = ({ data, openEditModal }) => {
   return (
     <main className="poke-list">
       {data.map(pokemon => (
-        <PokemonElement key={pokemon.name} id={getPokemonIdFromURL(pokemon.url)} name={pokemon.name} sprite={getPokemonSpriteFromURL(pokemon.url)}></PokemonElement>
+        <PokemonElement key={pokemon.name}
+          id={getPokemonIdFromURL(pokemon.url)}
+          name={pokemon.name}
+          sprite={getPokemonSpriteFromURL(pokemon.url)}
+          onClick={openEditModal}></PokemonElement>
       ))}
     </main>
   )

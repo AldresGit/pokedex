@@ -2,13 +2,23 @@ import { FC, useMemo, useState } from "react";
 import { Pokemon } from "../models/pokemon";
 import { getPokemonListQuery } from "../services/api/pokeApi";
 import PokemonList from "../components/PokemonList";
+import PokemonDetailModal from "../components/PokemonDetailModal/PokemonDetailModal";
 
 
 const Pokedex: FC = () => {
   const [page, setPage] = useState(0);
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+  const [pokemonDetailId, setPokemonDetailId] = useState('');
   const [previousDisabled, setPreviousDisabled] = useState(false);
   const [nextDisabled, setNextDisabled] = useState(true);
+  const [modalDetailOpen, setModalDetailOpen] = useState(false);
+
+  const handleOpenModal = (pokemonId: string) => {
+    // console.log('La id desde la pokedex ---> ', pokemonId);
+    setPokemonDetailId(pokemonId)
+    setModalDetailOpen(true);
+  }
+  const handleCloseModal = () => setModalDetailOpen(false);
   
   const getPokemonList = useMemo(() => getPokemonListQuery('pokemon/', page).then(
     (response) => {
@@ -41,7 +51,10 @@ const Pokedex: FC = () => {
           Next
         </button>
       </div>
-      <PokemonList data={pokemons}></PokemonList>
+      <PokemonList data={pokemons} openEditModal={(pokemonId: string) => {
+        handleOpenModal(pokemonId);
+      }}></PokemonList>
+      <PokemonDetailModal isOpen={modalDetailOpen} onClose={handleCloseModal} pokemonId={pokemonDetailId}></PokemonDetailModal>
     </>
   )
 };
