@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react'
-import './styles/App.scss'
 import { getPokemonList } from './services/api/pokeApi'
 import { Pokemon } from './models/pokemon'
 import PokemonList from './components/PokemonList'
