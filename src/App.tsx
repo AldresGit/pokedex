@@ -1,37 +1,24 @@
 import { useMemo, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.scss'
+import './styles/App.scss'
 import { getPokemonList } from './services/api/pokeApi'
 import { Pokemon } from './models/pokemon'
-import { getGenerationRange } from './utils/utils'
+import PokemonList from './components/PokemonList'
 
 function App() {
   const [count, setCount] = useState(0);
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   
-  const getGenerationList = useMemo(() => getPokemonList('pokemon/', getGenerationRange(count)).then(
+  const getGenerationList = useMemo(() => getPokemonList('pokemon/', count).then(
     (response) => {
       if(response.status === 200) {
         setPokemons(response.data.results);
       }
       // Show error in other case
     }
-  ), [count]);
-
-  console.log('La lista de pokemons guardados ---> ', pokemons);
-  
+  ), [count]);  
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
       <h1>Vite + React</h1>
       <div className="card">
         <button onClick={() => {
@@ -41,13 +28,8 @@ function App() {
         }>
           count is {count}
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <PokemonList data={pokemons}></PokemonList>
     </>
   )
 }
