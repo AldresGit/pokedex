@@ -1,6 +1,6 @@
 import { FC, useMemo, useState } from "react";
 import { Pokemon } from "../models/pokemon";
-import { getPokemonList } from "../services/api/pokeApi";
+import { getPokemonListQuery } from "../services/api/pokeApi";
 import PokemonList from "../components/PokemonList";
 
 
@@ -10,7 +10,7 @@ const Pokedex: FC = () => {
   const [previousDisabled, setPreviousDisabled] = useState(false);
   const [nextDisabled, setNextDisabled] = useState(true);
   
-  const getGenerationList = useMemo(() => getPokemonList('pokemon/', page).then(
+  const getPokemonList = useMemo(() => getPokemonListQuery('pokemon/', page).then(
     (response) => {
       if(response.status === 200) {
         setPokemons(response.data.results);
@@ -27,7 +27,7 @@ const Pokedex: FC = () => {
       <div className="menu">
         <button disabled={previousDisabled} onClick={() => {
             setPage((page) => page - 1 );
-            getGenerationList;
+            getPokemonList;
           }
         }>
           Previous
@@ -35,7 +35,7 @@ const Pokedex: FC = () => {
         <span className="span-title">Page {page + 1}</span>
         <button disabled={nextDisabled} onClick={() => {
             setPage((page) => page + 1 );
-            getGenerationList;
+            getPokemonList;
           }
         }>
           Next

@@ -18,7 +18,7 @@ const getConfig: Params = {
 
 const PAGE_SIZE = 20;
 
-export const getPokemonList = async (url: string, page: number): Promise<{data: PaginatedResponse<Pokemon[]>, status: number}> => {
+export const getPokemonListQuery = async (url: string, page: number): Promise<{data: PaginatedResponse<Pokemon[]>, status: number}> => {
     console.log('La data que le viene --> ', page);
     return await axios({
         ...getConfig,
