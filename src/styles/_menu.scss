@@ -1,0 +1,35 @@
+.menu {
+  margin-bottom: 10px;
+
+  .span-title {
+    font-size: 20px;
+    font-weight: 500;
+    margin: 10px 20px;
+  }
+
+  button {
+    width: 160px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: #1a1a1a;
+    color: #f9f9f9;
+    transition: border-color 0.25s;
+  }
+
+  button:enabled {
+    cursor: pointer;
+  }
+
+  button:hover:enabled {
+    border-color: rgb(201,130,255);
+  }
+
+  button:disabled,
+  button[disabled] {
+    background-color: #404d56;
+  }
+}

@@ -4,6 +4,7 @@ import { getPokemonListQuery } from "../services/api/pokeApi";
 import PokemonList from "../components/PokemonList";
 import PokemonDetailModal from "../components/PokemonDetailModal/PokemonDetailModal";
 import PaginatedMenu from "../components/PaginatedMenu/PaginatedMenu";
+import pokeballIcon from "../assets/pokeball.png";
 
 
 const Pokedex: FC = () => {
@@ -36,7 +37,7 @@ const Pokedex: FC = () => {
   
   return (
     <>
-      <h1>Pokedex</h1>
+      <header><img src={pokeballIcon} alt="pokeball" /></header>
       <PaginatedMenu
         page={page}
         leftButtonDisabled={previousDisabled}
