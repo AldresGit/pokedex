@@ -24,6 +24,7 @@ const PokemonDetailModal: FC<PokemonDetailModalProps> = ({ isOpen, onClose, poke
           if(response.status === 200) {
             setPokemonDetails(response.data);
           }
+          // Here you would manage the errors from the API
         }
       )
     }

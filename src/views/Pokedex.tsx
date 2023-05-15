@@ -29,7 +29,7 @@ const Pokedex: FC = () => {
         response.data.next ? setNextDisabled(false) : setNextDisabled(true);
         response.data.previous ? setPreviousDisabled(false) : setPreviousDisabled(true);
       }
-      // Show error in other case
+      // Here you would manage the errors from the API
     }
   ), [page]);
 
