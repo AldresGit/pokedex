@@ -3,6 +3,7 @@ import { Pokemon } from "../models/pokemon";
 import { getPokemonListQuery } from "../services/api/pokeApi";
 import PokemonList from "../components/PokemonList";
 import PokemonDetailModal from "../components/PokemonDetailModal/PokemonDetailModal";
+import PaginatedMenu from "../components/PaginatedMenu/PaginatedMenu";
 
 
 const Pokedex: FC = () => {
@@ -22,8 +23,6 @@ const Pokedex: FC = () => {
   
   const getPokemonList = useMemo(() => getPokemonListQuery('pokemon/', page).then(
     (response) => {
-      console.log('hola');
-      
       if(response.status === 200) {
         setPokemons(response.data.results);
         response.data.next ? setNextDisabled(false) : setNextDisabled(true);
@@ -38,25 +37,22 @@ const Pokedex: FC = () => {
   return (
     <>
       <h1>Pokedex</h1>
-      <div className="menu">
-        <button disabled={previousDisabled} onClick={() => {
+      <PaginatedMenu
+        page={page}
+        leftButtonDisabled={previousDisabled}
+        leftButtonClick={() => {
             setPage((page) => page - 1 );
           }
-        }>
-          Previous
-        </button>
-        <span className="span-title">Page {page + 1}</span>
-        <button disabled={nextDisabled} onClick={() => {
+        }
+        rightButtonDisabled={nextDisabled}
+        rightButtonClick={() => {
             setPage((page) => page + 1 );
           }
-        }>
-          Next
-        </button>
-      </div>
+        } />
       <PokemonList data={pokemons} openEditModal={(pokemonId: string) => {
         handleOpenModal(pokemonId);
-      }}></PokemonList>
-      <PokemonDetailModal isOpen={modalDetailOpen} onClose={handleCloseModal} pokemonId={pokemonDetailId}></PokemonDetailModal>
+      }} />
+      <PokemonDetailModal isOpen={modalDetailOpen} onClose={handleCloseModal} pokemonId={pokemonDetailId} />
     </>
   )
 };
