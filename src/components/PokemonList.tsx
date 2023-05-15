@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Pokemon } from "../models/pokemon";
-import { getPokemonIdFromURL, getPokemonSpriteFromURL } from "../utils/utils";
+import { capitalizeName, getPokemonIdFromURL, getPokemonSpriteFromURL } from "../utils/utils";
 import PokemonElement from "./PokemonElement/PokemonElement";
 
 interface PokemonListProps {
@@ -14,7 +14,7 @@ const PokemonList: FC<PokemonListProps> = ({ data, openEditModal }) => {
       {data.map(pokemon => (
         <PokemonElement key={pokemon.name}
           id={getPokemonIdFromURL(pokemon.url)}
-          name={pokemon.name}
+          name={capitalizeName(pokemon.name)}
           sprite={getPokemonSpriteFromURL(pokemon.url)}
           onClick={openEditModal}></PokemonElement>
       ))}

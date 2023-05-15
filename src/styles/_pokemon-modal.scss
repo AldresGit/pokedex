@@ -11,11 +11,68 @@
 }
 
 .modal-content {
+  min-width: 500px;
+  min-height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #242424;
-  padding: 20px;
+  padding: 5px;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   position: relative;
+
+  section {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    h1 {
+      margin: 20px;
+    }
+
+    .pokemon-detail-row {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+
+      .pokemon-detail-column {
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+
+        .type-row {
+          display: flex;
+          flex-direction: row;
+        }
+
+        span, h2, h3 {
+          text-align: left;
+        }
+
+        h2 {
+          margin-top: 5px;
+        }
+
+        h3 {
+          margin-top: 5px;
+          margin-bottom: 5px;
+        }
+
+        h4 {
+          margin: 5px;
+          padding: 8px;
+          background-color: #404d56;
+          border-radius: 10px;
+        }
+
+        .ability-hidden {
+          color: #e4cd4e;
+        }
+      }
+    }
+  }
 }
 
 .close {

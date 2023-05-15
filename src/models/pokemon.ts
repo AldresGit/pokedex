@@ -17,6 +17,7 @@ export interface DetailPokemon {
     };
     stats: Stat[];
     types: Type[];
+    abilities: Ability[];
 }
 
 interface Stat {
@@ -34,4 +35,13 @@ interface Type {
         name: string;
         url: string;
     }
+}
+
+interface Ability {
+    ability: {
+        name: string;
+        url: string;
+    };
+    is_hidden: boolean;
+    slot: number;
 }
