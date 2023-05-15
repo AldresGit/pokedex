@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { PaginatedResponse } from '../../models/api';
-import { Pokemon } from '../../models/pokemon';
+import { DetailPokemon, Pokemon } from '../../models/pokemon';
 
 interface Params {
     baseUrl: string,
@@ -19,10 +19,27 @@ const getConfig: Params = {
 const PAGE_SIZE = 20;
 
 export const getPokemonListQuery = async (url: string, page: number): Promise<{data: PaginatedResponse<Pokemon[]>, status: number}> => {
-    console.log('La data que le viene --> ', page);
     return await axios({
         ...getConfig,
         url: `${getConfig.baseUrl}/${url}?offset=${page*PAGE_SIZE}&limit=20`,
+    }).then((response) => {
+        return {
+            status: response.status,
+            data: response.data
+        }
+    }).catch((error) => {
+        console.log(error);
+        return {
+            status: error.status,
+            data: error.response
+        }
+    })
+}
+
+export const getPokemonDetailQuery = async (url: string, id: string): Promise<{data: DetailPokemon, status: number}> => {
+    return await axios({
+        ...getConfig,
+        url: `${getConfig.baseUrl}/${url}${id}/`,
     }).then((response) => {
         return {
             status: response.status,

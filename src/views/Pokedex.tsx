@@ -8,20 +8,22 @@ import PokemonDetailModal from "../components/PokemonDetailModal/PokemonDetailMo
 const Pokedex: FC = () => {
   const [page, setPage] = useState(0);
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
-  const [pokemonDetailId, setPokemonDetailId] = useState('');
   const [previousDisabled, setPreviousDisabled] = useState(false);
   const [nextDisabled, setNextDisabled] = useState(true);
+
+  const [pokemonDetailId, setPokemonDetailId] = useState('');
   const [modalDetailOpen, setModalDetailOpen] = useState(false);
 
   const handleOpenModal = (pokemonId: string) => {
-    // console.log('La id desde la pokedex ---> ', pokemonId);
-    setPokemonDetailId(pokemonId)
+    setPokemonDetailId(pokemonId);
     setModalDetailOpen(true);
   }
   const handleCloseModal = () => setModalDetailOpen(false);
   
   const getPokemonList = useMemo(() => getPokemonListQuery('pokemon/', page).then(
     (response) => {
+      console.log('hola');
+      
       if(response.status === 200) {
         setPokemons(response.data.results);
         response.data.next ? setNextDisabled(false) : setNextDisabled(true);
@@ -30,6 +32,8 @@ const Pokedex: FC = () => {
       // Show error in other case
     }
   ), [page]);
+
+  getPokemonList;
   
   return (
     <>
@@ -37,7 +41,6 @@ const Pokedex: FC = () => {
       <div className="menu">
         <button disabled={previousDisabled} onClick={() => {
             setPage((page) => page - 1 );
-            getPokemonList;
           }
         }>
           Previous
@@ -45,7 +48,6 @@ const Pokedex: FC = () => {
         <span className="span-title">Page {page + 1}</span>
         <button disabled={nextDisabled} onClick={() => {
             setPage((page) => page + 1 );
-            getPokemonList;
           }
         }>
           Next
