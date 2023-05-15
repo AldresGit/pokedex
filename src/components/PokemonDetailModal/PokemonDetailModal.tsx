@@ -46,7 +46,7 @@ const PokemonDetailModal: FC<PokemonDetailModalProps> = ({ isOpen, onClose, poke
               <span>Type</span>
               <div className="type-row">
                 {pokemonDetails.types.map(type => (
-                  <h4>{capitalizeName(type.type.name)}</h4>
+                  <h4 key={type.type.name}>{capitalizeName(type.type.name)}</h4>
                 ))}
               </div>
               <span>Height</span>
@@ -56,11 +56,17 @@ const PokemonDetailModal: FC<PokemonDetailModalProps> = ({ isOpen, onClose, poke
             </div>
             <div className="pokemon-detail-column">
               <span>Abilities</span>
-              {pokemonDetails.abilities.map(ability => (
-                ability.is_hidden ? 
-                  <h3 className='ability-hidden'>{capitalizeName(ability.ability.name)} (hidden)</h3>
-                  : <h3>{capitalizeName(ability.ability.name)}</h3>
-              ))}
+              <div className="stat-column">
+                {pokemonDetails.abilities.map(ability => (
+                  ability.is_hidden ? 
+                    <h3 key={ability.ability.name} className='ability-hidden'>{capitalizeName(ability.ability.name)} (hidden)</h3>
+                    : <h3 key={ability.ability.name}>{capitalizeName(ability.ability.name)}</h3>
+                ))}
+                <span>Stats</span>
+                {pokemonDetails.stats.map(stat => (
+                  <h5 key={stat.stat.name}> {stat.stat.name}: {stat.base_stat}</h5>
+                ))}
+              </div>
             </div>
           </div>
         </section>
